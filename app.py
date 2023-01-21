@@ -1,6 +1,6 @@
 from constants import PLAYERS, TEAMS
 from teams import Team
-import statistics
+import statistics, operator
 
 class Team:
 
@@ -66,16 +66,15 @@ class Game:
                 avheightlist.append(p['height'])
             t.avgheight = statistics.mean(avheightlist)
 
-    def sort_func(self, e):
-        return e['height']
 
-    def arrange_height(self):
-        for t in self.teams:
-            print(f'{t} players before sorting :{t.players}')
-            t.players = t.players.sort(key=self.sort_func)
-            print(f'{t} players after sorting :{t.players}')
+    # def arrange_height(self):
+    #     for t in self.teams:
+    #         print(f'{t} players before sorting :{t.players}')
+    #         t.players = t.players.sort(key=self.sort_func)
+    #         print(f'{t} players after sorting :{t.players}')
 
     def stat_fmt(self, teamindex):
+        self.teams[teamindex].players.sort(key=operator.itemgetter('height'))
         print(f'''---------------------------------------------------------
 Team Name: {self.teams[teamindex]}
 Total Players: {self.teams[teamindex].number_of_players}
@@ -137,7 +136,7 @@ You must select either A or B. Nothing else is valid.""")
     def run_it(self, pdata, tdata):
         self.teams = self.team_maker(tdata)
         self.balance_teams(pdata.copy())
-        self.arrange_height()
+        # self.arrange_height()
         self.menu()
 
 

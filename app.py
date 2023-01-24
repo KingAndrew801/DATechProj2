@@ -74,7 +74,7 @@ class Game:
     #         print(f'{t} players after sorting :{t.players}')
 
     def stat_fmt(self, teamindex):
-        self.teams[teamindex].players.sort(key=operator.itemgetter('height'))
+        self.teams[teamindex].players.sort(key=operator.itemgetter('height'), reverse=True)
         print(f'''---------------------------------------------------------
 Team Name: {self.teams[teamindex]}
 Total Players: {self.teams[teamindex].number_of_players}
